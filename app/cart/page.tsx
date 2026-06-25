@@ -96,6 +96,7 @@ export default function CartPage() {
 							items: cartItems.map((item) => ({
 								productId: item.id,
 								quantity: item.quantity,
+								price: item.price,
 							})),
 						}),
 					});
@@ -149,7 +150,7 @@ export default function CartPage() {
 						<div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 transition-colors duration-300 p-6 shadow-sm dark:shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
 							<div className="flex items-center justify-between text-lg font-semibold text-slate-900 dark:text-white">
 								<span>Total</span>
-								<span>${total.toFixed(2)}</span>
+								<span>₹{total.toFixed(2)}</span>
 							</div>
 							{error ? (
 								<p className="text-sm text-rose-600">{error}</p>

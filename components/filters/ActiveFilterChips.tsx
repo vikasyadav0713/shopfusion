@@ -5,6 +5,8 @@ import { useFilter } from "@/hooks/useFilter";
 export default function ActiveFilterChips() {
   const { searchParams, deleteFilter, toggleArrayFilter, clearAllFilters } = useFilter();
 
+  if (!searchParams) return null;
+
   const chips: { label: string; onRemove: () => void }[] = [];
 
   // Parse Brands

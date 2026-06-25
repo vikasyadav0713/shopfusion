@@ -107,7 +107,7 @@ export default function QuickViewModal({ isOpen, onClose, product }: QuickViewMo
 
                 <div className="flex items-center gap-4 mb-6">
                   <span className="text-2xl font-bold text-slate-900 dark:text-white">
-                    ${product.price.toFixed(2)}
+                    ₹{product.price.toFixed(2)}
                   </span>
                   {product.reviewCount > 0 && (
                     <div className="flex items-center gap-1.5 px-3 py-1 bg-slate-50 dark:bg-slate-800 rounded-full">

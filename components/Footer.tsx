@@ -102,7 +102,7 @@ export default function Footer() {
     <div className="relative mt-40">
       
       {/* 1. Main Footer Container with responsive Light/Dark Background Identity */}
-      <footer className="relative bg-slate-50 dark:bg-[#040A15] pt-12 text-slate-600 dark:text-slate-300 transition-colors duration-300 border-t border-slate-200 dark:border-transparent">
+      <footer className="relative bg-[#F1F5F9] dark:bg-[#0B1121] pt-12 text-slate-600 dark:text-slate-300 transition-colors duration-300 border-t border-slate-200 dark:border-transparent">
         
         {/* Soft Background Gradient Spotlight */}
         <div className="pointer-events-none absolute left-0 top-0 h-[400px] w-full bg-gradient-to-b from-slate-200/50 dark:from-[#0F172A]/50 to-transparent" />
@@ -110,7 +110,7 @@ export default function Footer() {
         <div className="mx-auto max-w-[1400px] px-6 sm:px-8 lg:px-12">
           
           {/* 3. Floating Newsletter Card */}
-          <div className="relative -mt-32 mb-24 flex flex-col items-center justify-between gap-8 rounded-3xl border border-slate-200/60 dark:border-white/10 bg-white/70 dark:bg-slate-800/40 p-8 shadow-xl backdrop-blur-2xl lg:flex-row lg:px-16 lg:py-12 z-20 overflow-hidden">
+          <div className="relative -mt-32 mb-24 flex flex-col items-center justify-between gap-8 rounded-3xl border border-slate-200/60 dark:border-white/10 bg-white/70 dark:bg-slate-800/40 p-8 shadow-xl backdrop-blur-lg lg:flex-row lg:px-16 lg:py-12 z-20 overflow-hidden">
             
             {/* The strong soft white/blue glow right behind the newsletter text */}
             <div className="absolute left-1/4 top-1/2 -z-10 h-64 w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-indigo-500/10 dark:bg-indigo-300/20 blur-[100px]" />

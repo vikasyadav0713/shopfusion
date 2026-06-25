@@ -127,7 +127,7 @@ export default async function ManageProductsPage({
                       <td className="px-4 py-3 font-medium text-slate-900 dark:text-white transition-colors">
                         {product.name}
                       </td>
-                      <td className="px-4 py-3">${product.price.toFixed(2)}</td>
+                      <td className="px-4 py-3">₹{product.price.toFixed(2)}</td>
                       <td className="px-4 py-3">{product.stock}</td>
                       <td className="px-4 py-3 text-right">
                         <div className="flex items-center justify-end gap-3">

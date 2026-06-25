@@ -66,7 +66,7 @@ export default async function OrdersPage() {
                   orders.map((order) => (
                     <tr key={order.id} className="border-t border-slate-200 dark:border-slate-700 transition-colors">
                       <td className="px-4 py-3 font-medium text-slate-900 dark:text-white transition-colors">{order.id}</td>
-                      <td className="px-4 py-3">${order.totalAmount.toFixed(2)}</td>
+                      <td className="px-4 py-3">₹{order.totalAmount.toFixed(2)}</td>
                       <td className="px-4 py-3">{order.status}</td>
                     </tr>
                   ))

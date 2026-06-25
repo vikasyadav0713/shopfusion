@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 type OrderItemPayload = {
   productId: number;
   quantity: number;
+  price: number;
 };
 
 type OrderPayload = {
@@ -34,11 +35,12 @@ export async function POST(request: Request) {
         Number.isInteger(item.productId) &&
         typeof item.quantity === "number" &&
         Number.isInteger(item.quantity) &&
-        item.quantity > 0
+        item.quantity > 0 &&
+        typeof item.price === "number"
     );
 
     if (items.length !== body.items.length) {
-      return NextResponse.json({ error: "Invalid items" }, { status: 400 });
+      return NextResponse.json({ error: "Invalid items schema" }, { status: 400 });
     }
 
     const order = await prisma.order.create({
@@ -49,6 +51,7 @@ export async function POST(request: Request) {
           create: items.map((item) => ({
             productId: item.productId,
             quantity: item.quantity,
+            price: item.price,
           })),
         },
       },
@@ -57,6 +60,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json(order, { status: 201 });
   } catch (error) {
+    console.error("Order creation error:", error);
     return NextResponse.json({ error: "Failed to create order" }, { status: 500 });
   }
 }

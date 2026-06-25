@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useRecentlyViewedStore } from "@/store/useRecentlyViewedStore";
 import { useAuth } from "@clerk/nextjs";
-import { getProductImage } from "@/lib/getProductImage";
+import { getProductImageCandidates } from "@/lib/getProductImageClient";
 
 type TrackerProps = {
   product: {
@@ -25,7 +25,7 @@ export default function RecentlyViewedTracker({ product }: TrackerProps) {
     // Add to local storage
     addProduct({
       ...product,
-      image: getProductImage(product.name), // Ensure we have the resolved client image
+      image: getProductImageCandidates(product.name)[0] || product.image,
     });
 
     // If logged in, sync with DB

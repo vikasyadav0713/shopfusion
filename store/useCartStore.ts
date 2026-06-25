@@ -19,6 +19,7 @@ type CartState = {
 	decreaseQuantity: (id: number) => void;
 	openDrawer: () => void;
 	closeDrawer: () => void;
+	clearCart: () => void;
 };
 
 export const useCartStore = create<CartState>((set, get) => ({
@@ -69,4 +70,5 @@ export const useCartStore = create<CartState>((set, get) => ({
 	},
 	openDrawer: () => set({ isDrawerOpen: true }),
 	closeDrawer: () => set({ isDrawerOpen: false }),
+	clearCart: () => set({ cartItems: [] }),
 }));

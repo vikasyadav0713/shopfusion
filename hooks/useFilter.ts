@@ -4,7 +4,7 @@ import { useCallback } from "react";
 export function useFilter() {
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
+  const searchParams = useSearchParams()!;
 
   // Create a new URLSearchParams object from current params
   const createQueryString = useCallback(
@@ -22,14 +22,14 @@ export function useFilter() {
   );
 
   const setFilter = (name: string, value: string) => {
-    router.push(`${pathname}?${createQueryString(name, value)}`);
+    router.push(`${pathname}?${createQueryString(name, value)}`, { scroll: false });
   };
 
   const deleteFilter = (name: string) => {
     const params = new URLSearchParams(searchParams.toString());
     params.delete(name);
     if (name !== "page") params.delete("page"); // Reset page on filter clear
-    router.push(`${pathname}?${params.toString()}`);
+    router.push(`${pathname}?${params.toString()}`, { scroll: false });
   };
 
   const toggleArrayFilter = (name: string, value: string) => {
@@ -51,16 +51,16 @@ export function useFilter() {
     }
     
     params.delete("page"); // Reset page
-    router.push(`${pathname}?${params.toString()}`);
+    router.push(`${pathname}?${params.toString()}`, { scroll: false });
   };
 
   const clearAllFilters = () => {
     // Preserve search query if it exists
     const q = searchParams.get("q");
     if (q) {
-      router.push(`${pathname}?q=${q}`);
+      router.push(`${pathname}?q=${q}`, { scroll: false });
     } else {
-      router.push(pathname);
+      router.push(pathname, { scroll: false });
     }
   };
 

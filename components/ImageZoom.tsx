@@ -1,19 +1,19 @@
 "use client";
 
 import { useState, useRef, MouseEvent, TouchEvent } from "react";
-import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import ProductImage from "@/components/ProductImage";
 
 type ImageZoomProps = {
+  name: string;
   src: string;
   alt: string;
   category?: string;
   className?: string;
 };
 
-export default function ImageZoom({ src, alt, category, className = "" }: ImageZoomProps) {
+export default function ImageZoom({ name, src, alt, category, className = "" }: ImageZoomProps) {
   const [isZoomed, setIsZoomed] = useState(false);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [position, setPosition] = useState({ x: 50, y: 50 });
   const imageRef = useRef<HTMLDivElement>(null);
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
@@ -38,38 +38,30 @@ export default function ImageZoom({ src, alt, category, className = "" }: ImageZ
       ref={imageRef}
       className={`relative overflow-hidden bg-slate-100 dark:bg-slate-800 rounded-2xl cursor-zoom-in ${className}`}
       onMouseEnter={() => setIsZoomed(true)}
-      onMouseLeave={() => setIsZoomed(false)}
+      onMouseLeave={() => { setIsZoomed(false); setPosition({ x: 50, y: 50 }); }}
       onMouseMove={handleMouseMove}
       onTouchStart={() => setIsZoomed(true)}
-      onTouchEnd={() => setIsZoomed(false)}
+      onTouchEnd={() => { setIsZoomed(false); setPosition({ x: 50, y: 50 }); }}
       onTouchMove={handleTouchMove}
     >
-      <Image
-        src={src}
-        alt={alt}
-        fill
-        sizes="(max-width: 768px) 100vw, 50vw"
-        className={`object-cover transition-opacity duration-300 ${isZoomed ? "opacity-0" : "opacity-100"}`}
-        priority
-      />
-
-      <AnimatePresence>
-        {isZoomed && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              backgroundImage: `url(${src})`,
-              backgroundPosition: `${position.x}% ${position.y}%`,
-              backgroundSize: "200%",
-              backgroundRepeat: "no-repeat",
-            }}
-          />
-        )}
-      </AnimatePresence>
+      <div
+        className="relative w-full h-full transition-transform duration-300 ease-out"
+        style={{
+          transform: isZoomed ? `scale(2)` : `scale(1)`,
+          transformOrigin: `${position.x}% ${position.y}%`,
+        }}
+      >
+        <ProductImage
+          name={name}
+          src={src}
+          alt={alt}
+          category={category}
+          fill
+          sizes="(max-width: 768px) 100vw, 50vw"
+          className="object-cover"
+          priority
+        />
+      </div>
     </div>
   );
 }

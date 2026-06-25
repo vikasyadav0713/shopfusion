@@ -7,6 +7,8 @@ type ProductPayload = {
   price: number;
   description: string;
   images: string[];
+  image?: string;
+  category: string;
   stock: number;
 };
 
@@ -45,6 +47,8 @@ export async function POST(request: Request) {
       !Number.isFinite(body.price) ||
       !body.description ||
       typeof body.description !== "string" ||
+      !body.category ||
+      typeof body.category !== "string" ||
       images.length === 0 ||
       typeof body.stock !== "number" ||
       !Number.isInteger(body.stock)
@@ -57,6 +61,8 @@ export async function POST(request: Request) {
         name: body.name,
         price: body.price,
         description: body.description,
+        category: body.category,
+        image: images[0],
         images,
         stock: body.stock,
       },

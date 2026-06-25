@@ -19,8 +19,8 @@ export default function FilterSidebar({ brands, categories, maxPrice }: FilterSi
   const activeDiscount = searchParams.get("discount");
 
   return (
-    <aside className="w-full space-y-8 bg-white dark:bg-slate-900 transition-colors duration-300 p-6 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-md dark:shadow-none hidden lg:block">
-      
+    <aside className="w-full flex-1 space-y-8 bg-white dark:bg-slate-900 transition-colors duration-300 p-6 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-md dark:shadow-none hidden lg:block">
+
       {/* Categories */}
       <div>
         <h3 className="font-semibold text-slate-900 dark:text-white mb-4 uppercase text-xs tracking-widest transition-colors">Categories</h3>
@@ -139,7 +139,7 @@ export default function FilterSidebar({ brands, categories, maxPrice }: FilterSi
                     deleteFilter("discount");
                   }
                 }}
-                onChange={() => {}}
+                onChange={() => { }}
                 className="w-4 h-4 text-violet-600 focus:ring-violet-500 cursor-pointer"
               />
               <span className="text-sm text-slate-600 dark:text-slate-400 transition-colors">{discount}% Off or more</span>
