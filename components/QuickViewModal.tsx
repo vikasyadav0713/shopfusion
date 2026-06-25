@@ -45,7 +45,12 @@ export default function QuickViewModal({ isOpen, onClose, product }: QuickViewMo
 
   const handleAddToCart = () => {
     for (let i = 0; i < quantity; i++) {
-      addToCart({ ...product, quantity: 1 });
+      addToCart({ 
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.image,
+      });
     }
     toast.success("Added to cart");
     onClose();
