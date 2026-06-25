@@ -125,17 +125,17 @@ export default function CartPage() {
 	};
 
 	return (
-		<main className="min-h-screen bg-slate-50 px-4 py-10 sm:px-8">
+		<main className="min-h-screen bg-slate-50 dark:bg-transparent transition-colors duration-300 px-4 py-10 sm:px-8">
 			<div className="mx-auto flex w-full max-w-4xl flex-col gap-8">
 				<header className="space-y-2">
-					<h1 className="text-3xl font-semibold text-slate-900">Your cart</h1>
-					<p className="text-sm text-slate-500">
+					<h1 className="text-3xl font-semibold text-slate-900 dark:text-white transition-colors">Your cart</h1>
+					<p className="text-sm text-slate-500 dark:text-slate-400 transition-colors">
 						Review your items and proceed to checkout.
 					</p>
 				</header>
 
 				{cartItems.length === 0 ? (
-					<div className="rounded-2xl border border-dashed border-slate-300 bg-white p-10 text-center text-slate-600">
+					<div className="rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 transition-colors duration-300 p-10 text-center text-slate-600 dark:text-slate-400">
 						Your cart is empty. Start adding products.
 					</div>
 				) : (
@@ -146,8 +146,8 @@ export default function CartPage() {
 							))}
 						</section>
 
-						<div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-							<div className="flex items-center justify-between text-lg font-semibold text-slate-900">
+						<div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 transition-colors duration-300 p-6 shadow-sm dark:shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+							<div className="flex items-center justify-between text-lg font-semibold text-slate-900 dark:text-white">
 								<span>Total</span>
 								<span>${total.toFixed(2)}</span>
 							</div>
@@ -158,7 +158,7 @@ export default function CartPage() {
 								type="button"
 								onClick={handleCheckout}
 								disabled={isCheckingOut}
-								className="mt-4 w-full rounded-lg bg-slate-900 px-4 py-3 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-70"
+								className="mt-4 w-full rounded-lg bg-slate-900 dark:bg-white px-4 py-3 text-sm font-semibold text-white dark:text-slate-900 transition-colors hover:bg-slate-800 dark:hover:bg-slate-200 disabled:cursor-not-allowed disabled:opacity-70"
 							>
 								{isCheckingOut ? "Processing..." : "Checkout"}
 							</button>

@@ -79,20 +79,20 @@ export default async function ManageProductsPage({
   });
 
   return (
-    <main className="min-h-screen bg-slate-50 px-4 py-10 sm:px-8">
+    <main className="min-h-screen px-4 py-10 sm:px-8">
       <div className="mx-auto grid w-full max-w-6xl gap-6 lg:grid-cols-[260px_1fr]">
         <AdminSidebar />
-        <section className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
+        <section className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 transition-colors duration-300 p-8 shadow-sm">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
-              <h1 className="text-2xl font-semibold text-slate-900">Manage Products</h1>
-              <p className="mt-1 text-sm text-slate-600">
+              <h1 className="text-2xl font-semibold text-slate-900 dark:text-white transition-colors">Manage Products</h1>
+              <p className="mt-1 text-sm text-slate-600 dark:text-slate-400 transition-colors">
                 Update pricing, stock, and product details.
               </p>
             </div>
             <Link
               href="/admin/products/new"
-              className="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800"
+              className="rounded-lg bg-slate-900 dark:bg-white px-4 py-2 text-sm font-semibold text-white dark:text-slate-900 transition hover:bg-slate-800 dark:hover:bg-slate-200"
             >
               Add Product
             </Link>
@@ -104,9 +104,9 @@ export default async function ManageProductsPage({
             </p>
           ) : null}
 
-          <div className="mt-6 overflow-hidden rounded-xl border border-slate-200">
+          <div className="mt-6 overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700 transition-colors">
             <table className="w-full text-left text-sm">
-              <thead className="bg-slate-100 text-xs font-semibold uppercase text-slate-500">
+              <thead className="bg-slate-100 dark:bg-slate-800 text-xs font-semibold uppercase text-slate-500 dark:text-slate-400 transition-colors">
                 <tr>
                   <th className="px-4 py-3">Name</th>
                   <th className="px-4 py-3">Price</th>
@@ -117,14 +117,14 @@ export default async function ManageProductsPage({
               <tbody>
                 {products.length === 0 ? (
                   <tr>
-                    <td colSpan={4} className="px-4 py-8 text-center text-slate-500">
+                    <td colSpan={4} className="px-4 py-8 text-center text-slate-500 dark:text-slate-400 transition-colors">
                       No products found.
                     </td>
                   </tr>
                 ) : (
                   products.map((product) => (
-                    <tr key={product.id} className="border-t border-slate-200">
-                      <td className="px-4 py-3 font-medium text-slate-900">
+                    <tr key={product.id} className="border-t border-slate-200 dark:border-slate-700 transition-colors">
+                      <td className="px-4 py-3 font-medium text-slate-900 dark:text-white transition-colors">
                         {product.name}
                       </td>
                       <td className="px-4 py-3">${product.price.toFixed(2)}</td>
@@ -133,7 +133,7 @@ export default async function ManageProductsPage({
                         <div className="flex items-center justify-end gap-3">
                           <Link
                             href={`/admin/products/${product.id}/edit`}
-                            className="text-sm font-semibold text-slate-700 hover:text-slate-900"
+                            className="text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors"
                           >
                             Edit
                           </Link>

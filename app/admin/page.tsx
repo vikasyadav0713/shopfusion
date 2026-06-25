@@ -34,31 +34,31 @@ export default async function AdminDashboardPage() {
 	await requireAdmin();
 
 	return (
-		<main className="min-h-screen bg-slate-50 px-4 py-10 sm:px-8">
+		<main className="min-h-screen px-4 py-10 sm:px-8">
 			<div className="mx-auto grid w-full max-w-6xl gap-6 lg:grid-cols-[260px_1fr]">
 				<AdminSidebar />
-				<section className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
-					<h1 className="text-2xl font-semibold text-slate-900">Admin Dashboard</h1>
-					<p className="mt-2 text-sm text-slate-600">
+				<section className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 transition-colors duration-300 p-8 shadow-sm">
+					<h1 className="text-2xl font-semibold text-slate-900 dark:text-white transition-colors">Admin Dashboard</h1>
+					<p className="mt-2 text-sm text-slate-600 dark:text-slate-400 transition-colors">
 						Manage products and monitor orders from one place.
 					</p>
 
 					<div className="mt-8 grid gap-4 sm:grid-cols-2">
 						<Link
 							href="/admin/products/new"
-							className="rounded-xl border border-slate-200 p-4 text-sm font-semibold text-slate-900 transition hover:border-slate-300 hover:bg-slate-50"
+							className="rounded-xl border border-slate-200 dark:border-slate-700 p-4 text-sm font-semibold text-slate-900 dark:text-slate-200 transition-colors hover:border-slate-300 dark:hover:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-800"
 						>
 							Add Product
 						</Link>
 						<Link
 							href="/admin/products"
-							className="rounded-xl border border-slate-200 p-4 text-sm font-semibold text-slate-900 transition hover:border-slate-300 hover:bg-slate-50"
+							className="rounded-xl border border-slate-200 dark:border-slate-700 p-4 text-sm font-semibold text-slate-900 dark:text-slate-200 transition-colors hover:border-slate-300 dark:hover:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-800"
 						>
 							Manage Products
 						</Link>
 						<Link
 							href="/admin/orders"
-							className="rounded-xl border border-slate-200 p-4 text-sm font-semibold text-slate-900 transition hover:border-slate-300 hover:bg-slate-50"
+							className="rounded-xl border border-slate-200 dark:border-slate-700 p-4 text-sm font-semibold text-slate-900 dark:text-slate-200 transition-colors hover:border-slate-300 dark:hover:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-800"
 						>
 							View Orders
 						</Link>

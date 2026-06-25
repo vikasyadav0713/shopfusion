@@ -1,31 +1,32 @@
+import ProductCardSkeleton from "@/components/skeletons/ProductCardSkeleton";
+
 export default function Loading() {
   return (
-    <main className="px-4 pb-16 pt-10 sm:px-8">
-      <div className="mx-auto flex w-full max-w-6xl flex-col gap-10">
-        <section className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm sm:p-12">
-          <div className="h-4 w-24 animate-pulse rounded-full bg-slate-200" />
-          <div className="mt-4 h-10 w-3/4 animate-pulse rounded-2xl bg-slate-200" />
-          <div className="mt-4 h-4 w-2/3 animate-pulse rounded-full bg-slate-200" />
-          <div className="mt-6 grid gap-4 sm:grid-cols-2">
-            <div className="h-24 animate-pulse rounded-2xl bg-slate-100" />
-            <div className="h-24 animate-pulse rounded-2xl bg-slate-100" />
-          </div>
-        </section>
+    <main className="px-4 pb-24 pt-8 sm:px-8 min-h-screen transition-colors duration-300">
+      <div className="mx-auto flex w-full max-w-[1400px] flex-col gap-10">
+        {/* Top Hero Section Skeleton */}
+        <section className="relative overflow-hidden rounded-[32px] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-8 shadow-sm sm:p-12 animate-pulse h-64" />
 
-        <section className="space-y-4">
-          <div className="flex items-center justify-between">
-            <div className="h-6 w-40 animate-pulse rounded-full bg-slate-200" />
-            <div className="h-4 w-32 animate-pulse rounded-full bg-slate-200" />
+        {/* Main Content Layout */}
+        <div className="flex flex-col lg:flex-row gap-8 items-start">
+          
+          {/* Desktop Filter Sidebar Skeleton */}
+          <div className="hidden lg:block w-72 shrink-0">
+            <div className="h-[600px] rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 animate-pulse" />
           </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {Array.from({ length: 6 }).map((_, index) => (
-              <div
-                key={index}
-                className="h-80 animate-pulse rounded-2xl border border-slate-200 bg-white"
-              />
-            ))}
+
+          {/* Product Grid Area Skeleton */}
+          <div className="flex-1 w-full min-w-0">
+            {/* Grid Header Skeleton */}
+            <div className="h-16 mb-6 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 animate-pulse" />
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {Array.from({ length: 8 }).map((_, index) => (
+                <ProductCardSkeleton key={index} />
+              ))}
+            </div>
           </div>
-        </section>
+        </div>
       </div>
     </main>
   );

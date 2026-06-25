@@ -8,7 +8,7 @@ const navItems = [
 
 export default function AdminSidebar() {
 	return (
-		<aside className="flex w-full flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+		<aside className="flex w-full flex-col gap-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 transition-colors duration-300 p-6 shadow-sm">
 			<div className="space-y-1">
 				<p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
 					ShopFusion

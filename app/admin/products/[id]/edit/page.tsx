@@ -95,12 +95,12 @@ export default async function EditProductPage({ params, searchParams }: PageProp
 	}
 
 	return (
-		<main className="min-h-screen bg-slate-50 px-4 py-10 sm:px-8">
+		<main className="min-h-screen px-4 py-10 sm:px-8">
 			<div className="mx-auto grid w-full max-w-6xl gap-6 lg:grid-cols-[260px_1fr]">
 				<AdminSidebar />
-				<section className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
-					<h1 className="text-2xl font-semibold text-slate-900">Edit Product</h1>
-					<p className="mt-2 text-sm text-slate-600">Update product details.</p>
+				<section className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 transition-colors duration-300 p-8 shadow-sm">
+					<h1 className="text-2xl font-semibold text-slate-900 dark:text-white transition-colors">Edit Product</h1>
+					<p className="mt-2 text-sm text-slate-600 dark:text-slate-400 transition-colors">Update product details.</p>
 
 					{searchParams?.error ? (
 						<p className="mt-4 text-sm font-semibold text-rose-600">
@@ -111,7 +111,7 @@ export default async function EditProductPage({ params, searchParams }: PageProp
 					<form action={updateProduct} className="mt-6 space-y-4">
 						<input type="hidden" name="id" value={product.id} />
 						<div>
-							<label htmlFor="product-name" className="text-sm font-medium text-slate-700">
+							<label htmlFor="product-name" className="text-sm font-medium text-slate-700 dark:text-slate-300 transition-colors">
 								Name
 							</label>
 							<input
@@ -120,12 +120,12 @@ export default async function EditProductPage({ params, searchParams }: PageProp
 								required
 								defaultValue={product.name}
 								title="Product name"
-								className="mt-2 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"
+								className="mt-2 w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2 text-sm text-slate-900 dark:text-white transition-colors"
 							/>
 						</div>
 						<div className="grid gap-4 sm:grid-cols-2">
 							<div>
-								<label htmlFor="product-price" className="text-sm font-medium text-slate-700">
+								<label htmlFor="product-price" className="text-sm font-medium text-slate-700 dark:text-slate-300 transition-colors">
 									Price
 								</label>
 								<input
@@ -136,11 +136,11 @@ export default async function EditProductPage({ params, searchParams }: PageProp
 									required
 									defaultValue={product.price}
 									title="Product price"
-									className="mt-2 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"
+									className="mt-2 w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2 text-sm text-slate-900 dark:text-white transition-colors"
 								/>
 							</div>
 							<div>
-								<label htmlFor="product-stock" className="text-sm font-medium text-slate-700">
+								<label htmlFor="product-stock" className="text-sm font-medium text-slate-700 dark:text-slate-300 transition-colors">
 									Stock
 								</label>
 								<input
@@ -151,12 +151,12 @@ export default async function EditProductPage({ params, searchParams }: PageProp
 									required
 									defaultValue={product.stock}
 									title="Available stock"
-									className="mt-2 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"
+									className="mt-2 w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2 text-sm text-slate-900 dark:text-white transition-colors"
 								/>
 							</div>
 						</div>
 						<div>
-							<label htmlFor="product-images" className="text-sm font-medium text-slate-700">
+							<label htmlFor="product-images" className="text-sm font-medium text-slate-700 dark:text-slate-300 transition-colors">
 								Image URLs
 							</label>
 							<textarea
@@ -166,16 +166,16 @@ export default async function EditProductPage({ params, searchParams }: PageProp
 								rows={3}
 								defaultValue={product.images.join(", ")}
 								title="Image URLs"
-								className="mt-2 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"
+								className="mt-2 w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2 text-sm text-slate-900 dark:text-white transition-colors"
 							/>
-							<p className="mt-2 text-xs text-slate-500">
+							<p className="mt-2 text-xs text-slate-500 dark:text-slate-400 transition-colors">
 								Add multiple URLs separated by commas or new lines.
 							</p>
 						</div>
 						<div>
 							<label
 								htmlFor="product-description"
-								className="text-sm font-medium text-slate-700"
+								className="text-sm font-medium text-slate-700 dark:text-slate-300 transition-colors"
 							>
 								Description
 							</label>
@@ -186,12 +186,12 @@ export default async function EditProductPage({ params, searchParams }: PageProp
 								required
 								defaultValue={product.description}
 								title="Product description"
-								className="mt-2 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"
+								className="mt-2 w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2 text-sm text-slate-900 dark:text-white transition-colors"
 							/>
 						</div>
 						<button
 							type="submit"
-							className="inline-flex items-center justify-center rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800"
+							className="inline-flex items-center justify-center rounded-lg bg-slate-900 dark:bg-white px-4 py-2 text-sm font-semibold text-white dark:text-slate-900 transition hover:bg-slate-800 dark:hover:bg-slate-200"
 						>
 							Save Changes
 						</button>

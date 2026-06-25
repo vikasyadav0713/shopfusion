@@ -39,16 +39,16 @@ export default async function OrdersPage() {
   });
 
   return (
-    <main className="min-h-screen bg-slate-50 px-4 py-10 sm:px-8">
+    <main className="min-h-screen px-4 py-10 sm:px-8">
       <div className="mx-auto grid w-full max-w-6xl gap-6 lg:grid-cols-[260px_1fr]">
         <AdminSidebar />
-        <section className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
-          <h1 className="text-2xl font-semibold text-slate-900">Orders</h1>
-          <p className="mt-2 text-sm text-slate-600">Track recent purchases.</p>
+        <section className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 transition-colors duration-300 p-8 shadow-sm">
+          <h1 className="text-2xl font-semibold text-slate-900 dark:text-white transition-colors">Orders</h1>
+          <p className="mt-2 text-sm text-slate-600 dark:text-slate-400 transition-colors">Track recent purchases.</p>
 
-          <div className="mt-6 overflow-hidden rounded-xl border border-slate-200">
+          <div className="mt-6 overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700 transition-colors">
             <table className="w-full text-left text-sm">
-              <thead className="bg-slate-100 text-xs font-semibold uppercase text-slate-500">
+              <thead className="bg-slate-100 dark:bg-slate-800 text-xs font-semibold uppercase text-slate-500 dark:text-slate-400 transition-colors">
                 <tr>
                   <th className="px-4 py-3">Order ID</th>
                   <th className="px-4 py-3">Total</th>
@@ -58,14 +58,14 @@ export default async function OrdersPage() {
               <tbody>
                 {orders.length === 0 ? (
                   <tr>
-                    <td colSpan={3} className="px-4 py-8 text-center text-slate-500">
+                    <td colSpan={3} className="px-4 py-8 text-center text-slate-500 dark:text-slate-400 transition-colors">
                       No orders yet.
                     </td>
                   </tr>
                 ) : (
                   orders.map((order) => (
-                    <tr key={order.id} className="border-t border-slate-200">
-                      <td className="px-4 py-3 font-medium text-slate-900">{order.id}</td>
+                    <tr key={order.id} className="border-t border-slate-200 dark:border-slate-700 transition-colors">
+                      <td className="px-4 py-3 font-medium text-slate-900 dark:text-white transition-colors">{order.id}</td>
                       <td className="px-4 py-3">${order.totalAmount.toFixed(2)}</td>
                       <td className="px-4 py-3">{order.status}</td>
                     </tr>
