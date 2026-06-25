@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import ProductImage from "@/components/ProductImage";
 import { CartItem as CartItemType, useCartStore } from "@/store/useCartStore";
 
 type CartItemProps = {
@@ -38,7 +38,7 @@ export default function CartItem({ item }: CartItemProps) {
 	return (
 		<div className="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:flex-row sm:items-center">
 			<div className="relative h-24 w-full overflow-hidden rounded-xl bg-slate-100 sm:h-24 sm:w-32">
-				<Image src={item.image} alt={item.name} fill className="object-cover" />
+				<ProductImage name={item.name} src={item.image} alt={item.name} fill className="object-cover" />
 			</div>
 
 			<div className="flex flex-1 flex-col gap-2">

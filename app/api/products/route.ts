@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { getProductImage } from "@/lib/getProductImage";
 
 type ProductPayload = {
   name: string;
@@ -11,9 +12,15 @@ type ProductPayload = {
 
 export async function GET() {
   try {
-    const products = await prisma.product.findMany({
+    const rawProducts = await prisma.product.findMany({
       orderBy: { createdAt: "desc" },
     });
+
+    // Resolve each product's image to the local file
+    const products = rawProducts.map((p) => ({
+      ...p,
+      image: getProductImage(p.name),
+    }));
 
     return NextResponse.json(products);
   } catch (error) {

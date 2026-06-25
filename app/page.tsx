@@ -1,6 +1,7 @@
 import Link from "next/link";
 import ProductGallery from "@/components/ProductGallery";
 import { prisma } from "@/lib/prisma";
+import { getProductImage } from "@/lib/getProductImage";
 
 type PageProps = {
 	searchParams?: { q?: string; category?: string; sort?: string };
@@ -38,7 +39,7 @@ export default async function HomePage({ searchParams }: PageProps) {
 			: sort === "price_desc"
 				? { price: "desc" as const }
 				: { createdAt: "desc" as const };
-	const products = await prisma.product.findMany({
+	const rawProducts = await prisma.product.findMany({
 		select: {
 			id: true,
 			name: true,
@@ -49,6 +50,12 @@ export default async function HomePage({ searchParams }: PageProps) {
 		where: Object.keys(whereClause).length > 0 ? whereClause : undefined,
 		orderBy: orderByClause,
 	});
+
+	// Resolve each product's image to the local file in public/products/
+	const products = rawProducts.map((p) => ({
+		...p,
+		image: getProductImage(p.name),
+	}));
 
 	const categoriesForGallery = [activeCategory];
 

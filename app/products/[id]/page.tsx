@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { getProductImage } from "@/lib/getProductImage";
 import { AddToCartButton } from "@/components/CartItem";
 import { notFound } from "next/navigation";
 import ProductImage from "@/components/ProductImage";
@@ -20,13 +21,17 @@ export default async function ProductPage({ params }: Props) {
 
   if (!product) return notFound();
 
+  // Resolve the correct local image path server-side
+  const resolvedImage = getProductImage(product.name);
+
   return (
     <div className="p-6 max-w-5xl mx-auto">
       <div className="grid md:grid-cols-2 gap-8">
         {/* Product Image */}
         <div className="w-full h-[400px] relative">
           <ProductImage
-            src={product.image}
+            name={product.name}
+            src={resolvedImage}
             alt={product.name}
             fill
             sizes="(max-width: 1024px) 100vw, 50vw"
@@ -54,7 +59,7 @@ export default async function ProductPage({ params }: Props) {
               id: product.id,
               name: product.name,
               price: product.price,
-              image: product.image,
+              image: resolvedImage,
             }}
           />
         </div>

@@ -30,8 +30,8 @@ export default function Navbar() {
 	};
 
 	return (
-		<header className="sticky top-0 z-40 w-full border-b border-slate-200 bg-white/70 shadow-[0_10px_30px_rgba(15,23,42,0.12)] backdrop-blur-xl supports-[backdrop-filter]:bg-white/70">
-			<div className="mx-auto flex w-full max-w-6xl flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:px-8">
+		<header className="sticky top-0 z-50 w-full overflow-visible border-b border-slate-200 bg-white/70 shadow-[0_10px_30px_rgba(15,23,42,0.12)] backdrop-blur-xl supports-[backdrop-filter]:bg-white/70">
+			<div className="mx-auto flex w-full max-w-6xl flex-col gap-3 overflow-visible px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:px-8">
 				<Link href="/" className="group flex items-center gap-3">
 					<span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-600 via-purple-600 to-cyan-500 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(79,70,229,0.35)] transition group-hover:scale-[1.03]">
 						SF
@@ -66,7 +66,7 @@ export default function Navbar() {
 						/>
 					</form>
 
-				<nav className="flex flex-1 items-center justify-end gap-3">
+				<nav className="flex flex-1 items-center justify-end gap-3 overflow-visible">
 					<Link
 						href="/cart"
 						className="relative inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/85 px-4 py-2 text-sm font-medium text-slate-700 shadow-[0_10px_24px_rgba(15,23,42,0.1)] transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[0_16px_32px_rgba(15,23,42,0.16)]"
