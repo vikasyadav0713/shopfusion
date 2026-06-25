@@ -3,7 +3,7 @@ import { useCallback } from "react";
 
 export function useFilter() {
   const router = useRouter();
-  const pathname = usePathname();
+  const pathname = usePathname() || "/";
   const searchParams = useSearchParams()!;
 
   // Create a new URLSearchParams object from current params
