@@ -21,11 +21,21 @@ type ReviewCardProps = {
   onReviewDeleted: () => void;
 };
 
+// Extract a readable name from our seeded fake user IDs (e.g. "user_2xR4kAnika" → "Anika")
+// Falls back to "Shopper" for real Clerk user IDs
+function extractReviewerName(uid: string): string {
+  // Our seed format: user_2xR[X]k[Name]
+  const match = uid.match(/^user_2xR\wk(\w+)$/);
+  if (match) return match[1];
+  return "Shopper";
+}
+
 export default function ReviewCard({ review, onReviewDeleted }: ReviewCardProps) {
   const { userId } = useAuth();
   const isOwner = userId === review.userId;
   const [helpfulCount, setHelpfulCount] = useState(review.helpfulCount);
   const [isDeleting, setIsDeleting] = useState(false);
+  const reviewerName = extractReviewerName(review.userId);
 
   const handleHelpful = async () => {
     if (!userId) {
@@ -60,16 +70,15 @@ export default function ReviewCard({ review, onReviewDeleted }: ReviewCardProps)
   };
 
   return (
-    <div className="py-6 border-b border-slate-100 last:border-0">
+    <div className="py-6 border-b border-slate-100 dark:border-slate-800 last:border-0 transition-colors">
       <div className="flex justify-between items-start mb-3">
         <div className="flex items-center gap-3">
-          <div className="h-10 w-10 rounded-full bg-gradient-to-br from-violet-100 to-fuchsia-100 flex items-center justify-center text-violet-700 font-bold uppercase shrink-0">
-            {/* Generate random avatar letter based on userId for now, since Clerk data isn't fetched DB side */}
-            {review.userId.substring(5, 6)}
+          <div className="h-10 w-10 rounded-full bg-gradient-to-br from-violet-100 to-fuchsia-100 dark:from-violet-900 dark:to-fuchsia-900 flex items-center justify-center text-violet-700 dark:text-violet-300 font-bold uppercase shrink-0">
+            {reviewerName.charAt(0)}
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-semibold text-slate-900">Shopper</span>
+              <span className="font-semibold text-slate-900 dark:text-white transition-colors">{reviewerName}</span>
               {review.verifiedPurchase && (
                 <span className="inline-flex items-center gap-1 rounded bg-emerald-50 px-1.5 py-0.5 text-[10px] font-medium text-emerald-600">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-3 h-3">
@@ -79,7 +88,7 @@ export default function ReviewCard({ review, onReviewDeleted }: ReviewCardProps)
                 </span>
               )}
             </div>
-            <div className="text-xs text-slate-500">
+            <div className="text-xs text-slate-500 dark:text-slate-400 transition-colors">
               {formatDistanceToNow(new Date(review.createdAt), { addSuffix: true })}
             </div>
           </div>
@@ -100,13 +109,13 @@ export default function ReviewCard({ review, onReviewDeleted }: ReviewCardProps)
         <RatingStars rating={review.rating} size={16} />
       </div>
 
-      {review.title && <h4 className="font-semibold text-slate-800 mb-1">{review.title}</h4>}
-      <p className="text-slate-600 text-sm whitespace-pre-wrap leading-relaxed">{review.text}</p>
+      {review.title && <h4 className="font-semibold text-slate-800 dark:text-slate-100 transition-colors mb-1">{review.title}</h4>}
+      <p className="text-slate-600 dark:text-slate-300 transition-colors text-sm whitespace-pre-wrap leading-relaxed">{review.text}</p>
 
       <div className="mt-4 flex items-center gap-4">
         <button
           onClick={handleHelpful}
-          className="group flex items-center gap-1.5 text-xs font-medium text-slate-500 transition hover:text-slate-800"
+          className="group flex items-center gap-1.5 text-xs font-medium text-slate-500 dark:text-slate-400 transition hover:text-slate-800 dark:hover:text-slate-200"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

@@ -1,5 +1,5 @@
 import LandingClient from "@/components/LandingClient";
-import { prisma } from "@/lib/prisma";
+import { prisma, prismaWithRetry } from "@/lib/prisma";
 import { getProductImage } from "@/lib/getProductImage";
 import Link from "next/link";
 import ProductCard from "@/components/ProductCard";
@@ -8,6 +8,9 @@ import MobileFilterDrawer from "@/components/filters/MobileFilterDrawer";
 import ActiveFilterChips from "@/components/filters/ActiveFilterChips";
 import Pagination from "@/components/filters/Pagination";
 import SortSelect from "@/components/filters/SortSelect";
+
+// Always fetch fresh data — never serve a stale cached build
+export const dynamic = "force-dynamic";
 
 type PageProps = {
 	searchParams?: {
@@ -102,7 +105,7 @@ export default async function HomePage({ searchParams }: PageProps) {
 			fetchedBrandAgg,
 			fetchedCategoryAgg,
 			fetchedPriceAgg
-		] = await Promise.all([
+		] = await prismaWithRetry(() => Promise.all([
 			prisma.product.findMany({
 				take: 4,
 				orderBy: { reviewCount: "desc" },
@@ -132,7 +135,7 @@ export default async function HomePage({ searchParams }: PageProps) {
 				_max: { price: true },
 				where: facetWhereArg,
 			})
-		]);
+		]));
 
 		rawFeaturedProducts = fetchedFeatured;
 		rawProducts = fetchedProducts;
@@ -141,7 +144,7 @@ export default async function HomePage({ searchParams }: PageProps) {
 		categoryAgg = fetchedCategoryAgg;
 		priceAgg = fetchedPriceAgg;
 	} catch (error) {
-		console.error("Database query failed:", error);
+		console.error("Database query failed after retries:", error);
 	}
 
 	const featuredProducts = rawFeaturedProducts.map((p) => ({

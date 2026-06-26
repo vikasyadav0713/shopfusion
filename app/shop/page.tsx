@@ -1,12 +1,15 @@
 import Link from "next/link";
 import ProductCard from "@/components/ProductCard";
-import { prisma } from "@/lib/prisma";
+import { prisma, prismaWithRetry } from "@/lib/prisma";
 import { getProductImage } from "@/lib/getProductImage";
 import FilterSidebar from "@/components/filters/FilterSidebar";
 import MobileFilterDrawer from "@/components/filters/MobileFilterDrawer";
 import ActiveFilterChips from "@/components/filters/ActiveFilterChips";
 import Pagination from "@/components/filters/Pagination";
 import SortSelect from "@/components/filters/SortSelect";
+
+// Always fetch fresh data — never serve a stale cached build
+export const dynamic = "force-dynamic";
 
 type PageProps = {
 	searchParams?: {
@@ -88,7 +91,7 @@ export default async function HomePage({ searchParams }: PageProps) {
 	}
 
 	// Fetch Products & Total Count
-	const [rawProducts, totalCount] = await Promise.all([
+	const [rawProducts, totalCount] = await prismaWithRetry(() => Promise.all([
 		prisma.product.findMany({
 			select: { id: true, name: true, price: true, image: true, category: true, averageRating: true, reviewCount: true },
 			where: Object.keys(whereClause).length > 0 ? whereClause : undefined,
@@ -99,7 +102,7 @@ export default async function HomePage({ searchParams }: PageProps) {
 		prisma.product.count({
 			where: Object.keys(whereClause).length > 0 ? whereClause : undefined,
 		})
-	]);
+	]));
 
 	const products = rawProducts.map((p) => ({ ...p, image: getProductImage(p.name) }));
 	const totalPages = Math.ceil(totalCount / limit);
@@ -110,7 +113,7 @@ export default async function HomePage({ searchParams }: PageProps) {
 	delete facetWhere.brand;
 	delete facetWhere.category;
 
-	const [brandAgg, categoryAgg, priceAgg] = await Promise.all([
+	const [brandAgg, categoryAgg, priceAgg] = await prismaWithRetry(() => Promise.all([
 		prisma.product.groupBy({
 			by: ['brand'],
 			_count: { brand: true },
@@ -125,7 +128,7 @@ export default async function HomePage({ searchParams }: PageProps) {
 			_max: { price: true },
 			where: facetWhere,
 		})
-	]);
+	]));
 
 	const filterBrands = brandAgg.map(b => ({ brand: b.brand, count: b._count.brand })).sort((a, b) => b.count - a.count);
 	const filterCategories = categoryAgg.map(c => ({ category: c.category, count: c._count.category })).sort((a, b) => b.count - a.count);
